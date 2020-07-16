@@ -15,7 +15,7 @@ class Student
   def grade
     total = 0
     @scores.sum do |score|
-      total << score
+      total += score
     end
     total.to_f / @scores.count
   end
