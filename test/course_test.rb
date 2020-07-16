@@ -28,11 +28,13 @@ class CourseTest < Minitest::Test
     course.enroll(student1)
     course.enroll(student2)
 
-    assert_equal ["Morgan", "Jordan"], course.students
+    assert_equal [student1, student2], course.students
   end
 
   def test_it_can_get_full
     course = Course.new("Calculus", 2)
+    student1 = Student.new({name: "Morgan", age: 21})
+    student2 = Student.new({name: "Jordan", age: 29})
 
     assert_equal false, course.full?
 

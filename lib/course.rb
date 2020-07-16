@@ -1,3 +1,5 @@
+require "./lib/student"
+
 class Course
   attr_reader :name, :capacity, :students
 
@@ -5,5 +7,13 @@ class Course
     @name = name
     @capacity = capacity
     @students = []
+  end
+
+  def full?
+    @students.count >= @capacity
+  end
+
+  def enroll(student)
+    @students << student
   end
 end
