@@ -17,4 +17,47 @@ class TermTest < Minitest::Test
     assert_equal "Winter 2018", term.name
     assert_equal [], term.courses
   end
+
+  def test_it_can_add_courses
+    term = Term.new("Winter 2018")
+    course1 = Course.new("Calculus", 2)
+
+    term.add_course(course1)
+
+    assert_equal [course1], term.courses
+  end
+
+  def test_it_can_list_open_courses
+    term = Term.new("Winter 2018")
+    course1 = Course.new("Calculus", 2)
+    course2 = Course.new("U.S. History", 2)
+    course3 = Course.new("Art", 1)
+    student1 = Student.new({name: "Morgan", age: 21})
+    student2 = Student.new({name: "Jordan", age: 29})
+
+    term.add_course(course1)
+    term.add_course(course2)
+    term.add_course(course3)
+    term.courses[0].enroll(student1)
+    term.courses[2].enroll(student2)
+
+    assert_equal [course1, course2], term.open_courses
+  end
+
+  def test_it_can_list_students
+    term = Term.new("Winter 2018")
+    course1 = Course.new("Calculus", 2)
+    course2 = Course.new("U.S. History", 2)
+    course3 = Course.new("Art", 1)
+    student1 = Student.new({name: "Morgan", age: 21})
+    student2 = Student.new({name: "Jordan", age: 29})
+
+    term.add_course(course1)
+    term.add_course(course2)
+    term.add_course(course3)
+    term.courses[0].enroll(student1)
+    term.courses[2].enroll(student2)
+
+    assert_equal ["Morgan", "Jordan"], term.list_students
+  end
 end
